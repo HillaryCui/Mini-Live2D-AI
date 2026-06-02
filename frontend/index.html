@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>Mini Live2D AI</title>
+    <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+    <div class="app" id="app">
+        <div class="bubble-area" id="bubble-area"></div>
+        <div id="live2d-container">
+            <div class="corner corner-drag" id="corner-drag">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#444" stroke-width="2">
+                    <circle cx="8" cy="8" r="2"/><circle cx="16" cy="8" r="2"/>
+                    <circle cx="8" cy="16" r="2"/><circle cx="16" cy="16" r="2"/>
+                </svg>
+            </div>
+        </div>
+        <div class="input-area">
+            <input id="user-input" type="text" placeholder="输入一句话..." />
+            <button id="send-btn">发送</button>
+        </div>
+    </div>
+
+    <div id="context-menu" class="context-menu hidden">
+        <div class="menu-item" id="menu-history">显示历史</div>
+        <div class="menu-item" id="menu-vision">视觉感知：开</div>
+        <div class="menu-item" id="menu-exit">退出</div>
+    </div>
+
+    <div id="cdn-error" class="error-banner hidden">
+        <span>Live2D 资源加载失败，请检查网络连接。</span>
+        <button onclick="this.parentElement.classList.add('hidden')">✕</button>
+    </div>
+    <div id="model-error" class="error-banner hidden">
+        <span id="model-error-msg">模型加载失败</span>
+        <button onclick="this.parentElement.classList.add('hidden')">✕</button>
+    </div>
+    <div id="history-panel" class="history-panel hidden">
+        <div class="history-content" id="history-content"></div>
+    </div>
+
+    <script src="https://cubism.live2d.com/sdk-web/cubismcore/live2dcubismcore.min.js"
+            onerror="document.getElementById('cdn-error').classList.remove('hidden')"></script>
+    <script src="https://cdn.jsdelivr.net/npm/pixi.js@6.5.10/dist/browser/pixi.min.js"
+            onerror="document.getElementById('cdn-error').classList.remove('hidden')"></script>
+    <script src="https://cdn.jsdelivr.net/npm/pixi-live2d-display/dist/cubism4.min.js"
+            onerror="document.getElementById('cdn-error').classList.remove('hidden')"></script>
+    <script src="./main.js"></script>
+</body>
+</html>

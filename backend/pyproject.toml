@@ -1,0 +1,22 @@
+[project]
+name = "mini-live2d-ai-backend"
+version = "2.4.0"
+description = "Mini Live2D AI 后端服务"
+requires-python = ">=3.10"
+dependencies = [
+    "fastapi>=0.115.0",
+    "uvicorn[standard]>=0.30.0",
+    "pydantic>=2.0.0",
+    "python-dotenv>=1.0.0",
+    "openai>=1.50.0",
+    "pillow>=10.0.0",
+    "pywin32>=306; sys_platform == 'win32'",
+]
+
+[tool.uv]
+managed = true
+
+[dependency-groups]
+dev = [
+    "pyinstaller>=6.20.0",
+]

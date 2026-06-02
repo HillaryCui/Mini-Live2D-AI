@@ -1,0 +1,259 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    overflow: hidden;
+    background: transparent;
+    font-family: "Microsoft YaHei", Arial, sans-serif;
+}
+
+.app {
+    width: var(--base-w, 200px);
+    height: var(--base-h, 600px);
+    display: flex;
+    flex-direction: column;
+    background: transparent;
+    overflow: hidden;
+}
+
+.bubble-area {
+    height: var(--bubble-h, 80px);
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 4px 8px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    pointer-events: none;
+    scrollbar-width: none;
+}
+
+.bubble-area::-webkit-scrollbar {
+    display: none;
+}
+
+.bubble {
+    max-width: 80%;
+    padding: 6px 10px;
+    border-radius: 12px;
+    margin-bottom: 4px;
+    font-size: 12px;
+    line-height: 1.4;
+    word-break: break-word;
+    animation: fadeIn 0.3s ease;
+    opacity: 1;
+    transition: opacity 0.5s ease;
+}
+
+.bubble.fade-out {
+    opacity: 0;
+}
+
+.bubble.user {
+    align-self: flex-end;
+    background: #d1e7ff;
+    color: #1a1a1a;
+    border-bottom-right-radius: 4px;
+}
+
+.bubble.ai {
+    align-self: flex-start;
+    background: #f0f0f0;
+    color: #1a1a1a;
+    border-bottom-left-radius: 4px;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(6px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+#live2d-container {
+    flex: 1;
+    position: relative;
+    overflow: hidden;
+    background: transparent;
+}
+
+#live2d-container canvas {
+    background: transparent !important;
+}
+
+.corner {
+    position: absolute;
+    width: var(--corner-size, 28px);
+    height: var(--corner-size, 28px);
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+    -webkit-app-region: no-drag;
+    cursor: default;
+}
+
+.corner svg {
+    width: 60%;
+    height: 60%;
+}
+
+.corner-drag {
+    top: 4px;
+    left: 4px;
+    -webkit-app-region: drag;
+    cursor: grab;
+}
+
+.corner-drag:active {
+    cursor: grabbing;
+}
+
+.input-area {
+    height: var(--input-h, 40px);
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    padding: 4px 8px;
+    gap: 6px;
+    -webkit-app-region: no-drag;
+}
+
+.input-area input {
+    flex: 1;
+    height: 100%;
+    padding: 0 10px;
+    border: 1px solid #ccc;
+    border-radius: 16px;
+    outline: none;
+    font-size: 12px;
+    background: rgba(255, 255, 255, 0.9);
+}
+
+.input-area input:focus {
+    border-color: #88b8ff;
+}
+
+.input-area button {
+    height: 100%;
+    padding: 0 14px;
+    border: none;
+    border-radius: 16px;
+    background: #5b9bd5;
+    color: white;
+    font-size: 12px;
+    cursor: pointer;
+    flex-shrink: 0;
+}
+
+.input-area button:hover {
+    background: #4a8ac4;
+}
+
+.input-area button:disabled {
+    background: #aaa;
+    cursor: not-allowed;
+}
+
+.context-menu {
+    position: fixed;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+    padding: 4px 0;
+    min-width: 75px;
+    z-index: 1000;
+}
+
+.context-menu.hidden {
+    display: none;
+}
+
+.menu-item {
+    padding: 4px 8px;
+    font-size: 10px;
+    cursor: pointer;
+    color: #333;
+}
+
+.menu-item:hover {
+    background: #f0f0f0;
+}
+
+.history-panel {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    max-height: 60vh;
+    background: rgba(30, 30, 30, 0.92);
+    color: #eee;
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+    padding: 12px;
+    overflow-y: auto;
+    z-index: 999;
+    font-size: 13px;
+    line-height: 1.6;
+    animation: slideUp 0.3s ease;
+}
+
+.history-panel.hidden {
+    display: none;
+}
+
+@keyframes slideUp {
+    from { transform: translateY(100%); }
+    to   { transform: translateY(0); }
+}
+
+.history-content {
+    white-space: pre-wrap;
+    word-break: break-word;
+}
+
+.hist-item {
+    margin-bottom: 6px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.hist-role {
+    font-weight: bold;
+    color: #88b8ff;
+}
+
+.error-banner {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 2000;
+    background: #ff6b6b;
+    color: white;
+    font-size: 11px;
+    padding: 6px 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.error-banner button {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 14px;
+    cursor: pointer;
+    padding: 0 4px;
+}
+
+.error-banner.hidden {
+    display: none;
+}

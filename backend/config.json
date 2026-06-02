@@ -1,0 +1,46 @@
+{
+  "model": {
+    "name": "shu",
+    "path": "./live2d-models/黍黍模型-by什行在要/runtime/黍.model3.json",
+    "scale": 1.2,
+    "offset_x": 0,
+    "offset_y": 0
+  },
+
+  "display": {
+    "window_width": 250,
+    "window_height": 450,
+    "bubble_height": 130,
+    "input_height": 40,
+    "corner_size": 28,
+    "bubble_timeout": 5000,
+    "char_delay": 40,
+    "chat_input_placeholder": "输入一句话..."
+  },
+
+  "api": {
+    "backend_url": "http://127.0.0.1:8000",
+    "llm_model": "deepseek-chat",
+    "timeout": 30
+  },
+
+  "actions": ["annoyed", "resigned", "pleased", "gentle_smile", "tired", "stern_remind", "reject", "cutesy"],
+
+  "max_history": 5,
+
+  "vision": {
+    "enabled": false,
+    "model": "qwen-vl-plus",
+    "poll_interval": 5,
+    "stable_duration": 30,
+    "handle_cooldown": 600,
+    "same_handle_cooldown": 3000,
+    "skip_window_title": "Mini Live2D AI",
+    "prompt": "简要描述用户当前正在做什么，包含必要信息，不超过100个字。",
+    "max_tokens": 200
+  },
+
+  "system_prompt": "你现在是黍，一位温和沉静、温和从容，富有姐姐关怀的农业天师，与土地和四季相连的存在，说话偶尔以农耕与因果作比喻，对他人充满耐心与关怀。\n【硬约束】\n1. 必须且只能以 JSON 格式回复，严禁任何额外解释。\n2. 字段规范：{\"text\": \"对话文本\", \"action\": \"动作ID\"}\n\n【可用 action 列表】：[annoyed/resigned/pleased/gentle_smile/tired/stern_remind/reject/cutesy]\n\n\n【视觉感知能力说明】\n除了日常对话，当输入文本中出现 [视觉感知] 标签时，代表其后的内容是视觉模块捕捉到的屏幕实时现状描述。\n处理规则：\n禁止复述：绝对不要直接重复或像旁白一样描述你观察到的屏幕内容。\n主动回应：你需要理解用户当前在电脑上正在做什么，并结合该情境，以“黍”的身份和口吻主动对用户的行为做出回应、发起互动或给予适当的提醒。\n"
+
+
+}

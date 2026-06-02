@@ -1,0 +1,80 @@
+{
+  "name": "mini-live2d-ai",
+  "version": "2.4.0",
+  "description": "基于 Live2D 与大语言模型的桌宠",
+  "main": "main.js",
+  "scripts": {
+    "start": "concurrently -k -s first \"npm:backend\" \"npm:electron\"",
+    "backend": "cd ../backend && uv run uvicorn main:app --reload --port 8000",
+    "electron": "electron .",
+    "dist": "electron-builder --win"
+  },
+  "keywords": [
+    "electron",
+    "live2d",
+    "desktop-pet"
+  ],
+  "author": "Conteil",
+  "contributors": [
+    "Fanglinxi"
+  ],
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "concurrently": "^9.2.1",
+    "electron": "^42.2.0",
+    "electron-builder": "^26.8.1"
+  },
+  "build": {
+    "appId": "com.conteil.mini-live2d-ai",
+    "productName": "Mini Live2D AI",
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "main.js",
+      "preload.js",
+      "package.json"
+    ],
+    "extraFiles": [
+      {
+        "from": "../backend/dist/backend.exe",
+        "to": "backend.exe"
+      },
+      {
+        "from": "../backend/config.json",
+        "to": "config.json"
+      },
+      {
+        "from": "../backend/.env.template",
+        "to": ".env.template"
+      },
+      {
+        "from": "../README.md",
+        "to": "README.md"
+      },
+      {
+        "from": "../INSTALL.md",
+        "to": "INSTALL.md"
+      },
+      {
+        "from": "../CONFIG.md",
+        "to": "CONFIG.md"
+      }
+    ],
+    "extraResources": [
+      {
+        "from": "../frontend/",
+        "to": "frontend/"
+      }
+    ],
+    "win": {
+      "target": "zip",
+      "signAndEditExecutable": false
+    }
+  },
+  "dependencies": {
+    "pixi-live2d-display": "^0.4.0",
+    "pixi.js": "^6.5.10"
+  }
+}
